@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusX | Student Productivity</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-theme="midnight">
+  <header class="topbar">
+    <a class="logo" href="#">Focus<span>X</span></a>
+
+    <label class="theme-control" for="theme-select">
+      Theme
+      <select id="theme-select">
+        <option value="midnight">Midnight Purple</option>
+        <option value="light">Clean Light</option>
+        <option value="forest">Forest Green</option>
+        <option value="graphite">Graphite</option>
+      </select>
+    </label>
+  </header>
+
+  <main class="container">
+    <section class="welcome">
+      <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+      <h1>Make today <span>count.</span></h1>
+      <p>Small steps. Consistent progress. Better results.</p>
+    </section>
+
+    <section class="stats">
+      <article class="panel stat-card">
+        <p>Tasks completed</p>
+        <h2 id="completed-count">0</h2>
+      </article>
+      <article class="panel stat-card">
+        <p>Focus sessions</p>
+        <h2 id="session-count">0</h2>
+      </article>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel timer-panel">
+        <p class="eyebrow">STAY IN THE ZONE</p>
+        <h2>Focus timer</h2>
+
+        <div class="mode-switch">
+          <button class="mode-btn active" data-mode="focus" type="button">
+            Focus · 25 min
+          </button>
+          <button class="mode-btn" data-mode="break" type="button">
+            Break · 5 min
+          </button>
+        </div>
+
+        <div class="timer-circle" id="timer-circle">
+          <div class="timer-inner">
+            <span id="timer-label">FOCUS TIME</span>
+            <div id="timer-display" role="timer" aria-live="off">25:00</div>
+            <p id="timer-message">Ready when you are.</p>
+          </div>
+        </div>
+
+        <div class="timer-actions">
+          <button id="start-btn" class="primary-btn" type="button">Start</button>
+          <button id="reset-btn" class="secondary-btn" type="button">Reset</button>
+        </div>
+      </article>
+
+      <article class="panel tasks-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ONE STEP AT A TIME</p>
+            <h2>Today's tasks</h2>
+          </div>
+          <span id="task-count" class="task-count">0 tasks</span>
+        </div>
+
+        <form id="task-form">
+          <input
+            id="task-input"
+            type="text"
+            placeholder="What do you need to do?"
+            maxlength="120"
+            autocomplete="off"
+            required
+          >
+          <button class="primary-btn add-btn" type="submit">Add</button>
+        </form>
+
+        <div class="progress-info">
+          <span>Daily progress</span>
+          <span id="progress-text">0%</span>
+        </div>
+
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+        <ul id="task-list"></ul>
+        <p id="empty-message" class="empty-message">No tasks yet. Add your first one!</p>
+      </article>
+    </section>
+
+    <footer>Built for better focus. Powered by you.</footer>
+  </main>
+</body>
+</html>
