@@ -4,17 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>FocusX | Student Productivity</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta
+    name="description"
+    content="FocusX is a simple productivity app for focused study sessions, task management, and daily progress."
+  >
+  <meta name="theme-color" content="#100d1b">
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="./manifest.json">
+
+  <!-- App icons -->
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- App JavaScript -->
+  <script src="./script.js" defer></script>
 </head>
+
 <body data-theme="midnight">
   <header class="topbar">
-    <a class="logo" href="#">Focus<span>X</span></a>
+    <a class="logo" href="./" aria-label="FocusX home">
+      Focus<span>X</span>
+    </a>
 
     <label class="theme-control" for="theme-select">
       Theme
-      <select id="theme-select">
+      <select id="theme-select" aria-label="Choose app theme">
         <option value="midnight">Midnight Purple</option>
         <option value="light">Clean Light</option>
         <option value="forest">Forest Green</option>
@@ -30,11 +50,12 @@
       <p>Small steps. Consistent progress. Better results.</p>
     </section>
 
-    <section class="stats">
+    <section class="stats" aria-label="Productivity statistics">
       <article class="panel stat-card">
         <p>Tasks completed</p>
         <h2 id="completed-count">0</h2>
       </article>
+
       <article class="panel stat-card">
         <p>Focus sessions</p>
         <h2 id="session-count">0</h2>
@@ -42,15 +63,25 @@
     </section>
 
     <section class="main-grid">
+      <!-- Focus timer -->
       <article class="panel timer-panel">
         <p class="eyebrow">STAY IN THE ZONE</p>
         <h2>Focus timer</h2>
 
-        <div class="mode-switch">
-          <button class="mode-btn active" data-mode="focus" type="button">
+        <div class="mode-switch" aria-label="Timer mode">
+          <button
+            class="mode-btn active"
+            data-mode="focus"
+            type="button"
+          >
             Focus · 25 min
           </button>
-          <button class="mode-btn" data-mode="break" type="button">
+
+          <button
+            class="mode-btn"
+            data-mode="break"
+            type="button"
+          >
             Break · 5 min
           </button>
         </div>
@@ -58,23 +89,32 @@
         <div class="timer-circle" id="timer-circle">
           <div class="timer-inner">
             <span id="timer-label">FOCUS TIME</span>
-            <div id="timer-display" role="timer" aria-live="off">25:00</div>
+            <div id="timer-display" role="timer" aria-live="off">
+              25:00
+            </div>
             <p id="timer-message">Ready when you are.</p>
           </div>
         </div>
 
         <div class="timer-actions">
-          <button id="start-btn" class="primary-btn" type="button">Start</button>
-          <button id="reset-btn" class="secondary-btn" type="button">Reset</button>
+          <button id="start-btn" class="primary-btn" type="button">
+            Start
+          </button>
+
+          <button id="reset-btn" class="secondary-btn" type="button">
+            Reset
+          </button>
         </div>
       </article>
 
+      <!-- Task tracker -->
       <article class="panel tasks-panel">
         <div class="section-heading">
           <div>
             <p class="eyebrow">ONE STEP AT A TIME</p>
             <h2>Today's tasks</h2>
           </div>
+
           <span id="task-count" class="task-count">0 tasks</span>
         </div>
 
@@ -85,9 +125,13 @@
             placeholder="What do you need to do?"
             maxlength="120"
             autocomplete="off"
+            aria-label="New task"
             required
           >
-          <button class="primary-btn add-btn" type="submit">Add</button>
+
+          <button class="primary-btn add-btn" type="submit">
+            Add
+          </button>
         </form>
 
         <div class="progress-info">
@@ -95,16 +139,45 @@
           <span id="progress-text">0%</span>
         </div>
 
-        <div class="progress-track">
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Task completion"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          id="progress-track"
+        >
           <div id="progress-fill" class="progress-fill"></div>
         </div>
 
-        <ul id="task-list"></ul>
-        <p id="empty-message" class="empty-message">No tasks yet. Add your first one!</p>
+        <ul id="task-list" aria-label="Today's task list"></ul>
+
+        <p id="empty-message" class="empty-message">
+          No tasks yet. Add your first one!
+        </p>
       </article>
     </section>
 
-    <footer>Built for better focus. Powered by you.</footer>
+    <footer>
+      Built for better focus. Powered by you.
+    </footer>
   </main>
+
+  <!-- Register service worker for offline support -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .catch((error) => {
+            console.error(
+              "FocusX service worker registration failed:",
+              error
+            );
+          });
+      });
+    }
+  </script>
 </body>
 </html>
